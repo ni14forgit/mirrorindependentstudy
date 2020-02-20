@@ -15,7 +15,8 @@
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HOST='Nishants-MacBook-Pro-4.local' react-scripts start",
+    "startlocal": "HOST='Nishants-MacBook-Pro-4.local' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
