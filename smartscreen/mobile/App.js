@@ -27,7 +27,7 @@ import {
 
 import io from 'socket.io-client';
 let socket;
-const ENDPOINT = 'http://10.197.88.190:5000';
+const ENDPOINT = 'http://localhost:5000';
 
 const App: () => React$Node = () => {
   useEffect(() => {

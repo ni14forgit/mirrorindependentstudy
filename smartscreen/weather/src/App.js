@@ -77,6 +77,7 @@ class App extends React.Component {
   apiCallToWeather = async function(position) {
     const lng = position.coords.longitude;
     const lat = position.coords.latitude;
+    console.log("trying to do stuff");
     const api_call = await fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
     ).catch(function(error) {
@@ -105,6 +106,7 @@ class App extends React.Component {
 
   getGeolocatedWeather = e => {
     e.preventDefault();
+    console.log("its working");
     let func = this.apiCallToWeather.bind(this);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(func);
