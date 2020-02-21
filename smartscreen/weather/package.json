@@ -15,7 +15,7 @@
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "start": "HTTPS=true react-scripts start",
+    "start": "react-scripts start",
     "startlocal": "HOST='Nishants-MacBook-Pro-4.local' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
