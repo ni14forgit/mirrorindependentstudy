@@ -1,0 +1,29 @@
+.fadeOut {
+  opacity: 0;
+  font-size: 30px;
+  font: sans-serif;
+  color: white;
+  transition: opacity 2.5s;
+}
+.fadeIn {
+  color: white;
+  opacity: 1;
+  font: sans-serif;
+  font-size: 30px;
+  transition: opacity 2.5s;
+}
+
+.fadeOutBig {
+  opacity: 0;
+  font-size: 60px;
+  font: sans-serif;
+  color: white;
+  transition: opacity 2.5s;
+}
+.fadeInBig {
+  color: white;
+  opacity: 1;
+  font: sans-serif;
+  font-size: 60px;
+  transition: opacity 2.5s;
+}
