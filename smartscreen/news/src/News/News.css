@@ -1,0 +1,36 @@
+.img {
+  width: 670px;
+  max-height: 800px;
+  display: block;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px solid white;
+}
+
+.title {
+  font-size: 40px;
+  text-align: center;
+  color: white;
+  font: "Palatino Linotype";
+}
+
+.author {
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  font: "Palatino Linotype";
+}
+
+.source {
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font: "Palatino Linotype";
+}
+
+.newsAPI {
+  padding-left: 10px;
+  font-size: "Times New Roman";
+  color: white;
+}
