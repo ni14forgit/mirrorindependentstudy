@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/nishantiyengar/Desktop/independent study/acne_detection/env"
+VIRTUAL_ENV="/Users/nishantiyengar/Desktop/mirrorindependentstudy/acne_detection/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
