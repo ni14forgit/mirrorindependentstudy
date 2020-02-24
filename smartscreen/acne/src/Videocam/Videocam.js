@@ -31,6 +31,7 @@ const WebcamCapture = () => {
     socket = io(ENDPOINT);
     socket.on("acne", () => {
       console.log("acneanalysis raspberry");
+      capture();
     });
     socket.emit("join");
   }, []);
@@ -46,7 +47,9 @@ const WebcamCapture = () => {
     $.ajax({
       type: "GET",
       //url: "http://127.0.0.1:5000?base64=" + imageSrc,
-      url: "http://10.194.24.88:5000?base64=" + imageSrc,
+      //changed URL TO 5001 remember, 190 is dukeBlue?!!
+      url: "http://10.197.88.190:5001?base64=" + imageSrc,
+      // url: "http://10.194.24.88:5001?base64=" + imageSrc,
       dataType: "json",
       data: JSON.stringify(),
       //success: function(data, e) {
