@@ -17,8 +17,13 @@ io.on("connection", socket => {
   });
 
   socket.on("weather", () => {
-    console.log("wEATHER");
+    console.log("WEATHER backend");
     io.emit("weather");
+  });
+
+  socket.on("acne", () => {
+    console.log("ACNE backend");
+    io.emit("acne");
   });
 
   socket.on("disconnect", () => {

@@ -37,8 +37,15 @@ const App: () => React$Node = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <Text>Jello</Text>
-        <Button title="Press me" onPress={() => socket.emit('weather')} />
+        <Text>App To Handle Mirror Functionality</Text>
+        <Button
+          title="Get Local Weather"
+          onPress={() => socket.emit('weather')}
+        />
+        <Button
+          title="Conduct Acne Analysis"
+          onPress={() => socket.emit('acne')}
+        />
       </SafeAreaView>
     </>
   );

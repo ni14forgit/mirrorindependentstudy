@@ -6,7 +6,8 @@ import Weather from "./components/Weather";
 import io from "socket.io-client";
 let socket;
 
-const ENDPOINT = "localhost:5000";
+//const ENDPOINT = "localhost:5000";
+const ENDPOINT = "10.197.88.190:5000";
 
 const API_KEY = "f58c25cc9e885c84a718f9d225c72ecb";
 class App extends React.Component {
