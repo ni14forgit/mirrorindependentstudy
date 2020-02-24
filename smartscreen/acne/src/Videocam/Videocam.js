@@ -4,6 +4,10 @@ import React, { useState, useEffect } from "react";
 import "./Videocam.css";
 import "../Results/Results.css";
 import Imageresult from "../Results/Results";
+import io from "socket.io-client";
+let socket;
+
+const ENDPOINT = "10.197.88.190:5000";
 
 const videoConstraints = {
   //1280
@@ -22,6 +26,14 @@ const WebcamCapture = () => {
   const [show, setShow] = useState(false);
 
   const webcamRef = React.useRef(null);
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.on("acne", () => {
+      console.log("acneanalysis raspberry");
+    });
+    socket.emit("join");
+  }, []);
 
   // const toggle = () => {
   //   setFace(!face);
