@@ -18,14 +18,15 @@ const styles = {
 };
 
 const WebcamCapture = () => {
-  const [face, setFace] = useState(false);
+  const [face, setFace] = useState(null);
+  const [show, setShow] = useState(false);
 
   const webcamRef = React.useRef(null);
 
-  const toggle = () => {
-    setFace(!face);
-    console.log(face);
-  };
+  // const toggle = () => {
+  //   setFace(!face);
+  //   console.log(face);
+  // };
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -33,18 +34,18 @@ const WebcamCapture = () => {
     $.ajax({
       type: "GET",
       //url: "http://127.0.0.1:5000?base64=" + imageSrc,
-      url: "http://0.0.0.0:5000?base64=" + imageSrc,
+      url: "http://10.194.24.88:5000?base64=" + imageSrc,
       dataType: "json",
       data: JSON.stringify(),
       //success: function(data, e) {
       success: data => {
         console.log(data);
-        console.log("successful transfer to flask");
-        toggle();
+        setFace(data["image"]);
+        setShow(true);
         //this.setFace(!face)
       }
     });
-  }, [webcamRef, toggle]);
+  }, [webcamRef]);
 
   //<div className="ResultImage">{imageresult(face)}</div>
 
@@ -63,10 +64,10 @@ const WebcamCapture = () => {
           <button type="button" onClick={capture}>
             Capture photo
           </button>
-          <button onClick={toggle}>toggle</button>
+          {/* <button onClick={toggle}>toggle</button> */}
         </>
       </div>
-      <Imageresult toggleStatus={face} />
+      <Imageresult imagesource={face} shouldshow={show} />
     </div>
   );
 };

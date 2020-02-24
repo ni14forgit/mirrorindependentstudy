@@ -164,16 +164,26 @@ def convolution(pimplepath, skinpath):
     #skin.save("results/nishant/" + facetitle+"_"+pimpletitle+".jpg")
 
     #USUAL DEAL
-    #skin.save("nonML/data/results/" + facetitle+"_"+pimpletitle+".jpg")
-    skin.save("../smartscreen/acne/src/Results/" + facetitle+"_"+pimpletitle+".jpg")
+    skin.save("nonML/data/results/" + facetitle+"_"+pimpletitle+".jpg")
+    #skin.save("../smartscreen/acne/src/Results/" + facetitle+"_"+pimpletitle+".jpg")
 
 
     # print(score)
     # print("\n")
 
 def send_to_react():
-    pass
-    #"nonML/data/results/test_nishant.jpg to ../smartscreen/src/Results
+    # directories = [i for i in os.listdir(path) if "DS" not in i]
+    # datafolders = [join(path, f) for f in directories]
+    # for folder in datafolders:
+    #     for myfile in os.listdir(folder):
+    #         file_path = os.path.join(folder, myfile)
+    imagepath = "nonML/data/results/test_nishant.jpg"
+    with open(imagepath, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+        print(type(encoded_string))
+    return (encoded_string.decode('utf-8'))
+    
+    
 
 
 def convert_aspect_ratio():

@@ -9,10 +9,8 @@ CORS(app)
 @app.route("/", methods = ["GET", "POST"])
 def generate_face():
     imagestring = request.args.get('base64')
-    #print("LOL")
-    #print(imagestring)
-    sequence(imagestring)
-    response = jsonify({"about":"hi"})
+    initial = sequence(imagestring)
+    response = jsonify({"image":initial})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
@@ -21,12 +19,13 @@ def sequence(image):
     convertbase64_store(image, "nishant", "nonML/data/demo_images/")
     skin_retrieve()
     convolution_manager()
-    send_to_react()
+    return send_to_react()
 
 
 
 
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    #app.run(debug = True, host="0.0.0.0", port = "5000", threaded = True)
+    app.run(host = "0.0.0.0", threaded = True)
 
