@@ -9,7 +9,7 @@ let socket;
 //const ENDPOINT = "localhost:5000";
 const ENDPOINT = "10.197.88.190:5000";
 
-const API_KEY = "f58c25cc9e885c84a718f9d225c72ecb";
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 class App extends React.Component {
   state = {
     temperature: undefined,
