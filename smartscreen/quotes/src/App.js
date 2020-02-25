@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./new.css";
-
-// const getNews = async e => {
-//   var url =
-//     "https://newsapi.org/v2/top-headlines?" +
-//     "country=us&" +
-//     "apiKey=e875b2e06c4b40d5aa411d29cdf875ce";
-//   const api_call = await fetch(url);
-//   const data = await api_call.json();
-//   console.log(data);
-// };
 
 const App = () => {
   const [counter, setCounter] = useState(0);
