@@ -5,8 +5,6 @@ import "./News.css";
 const News = props => {
   const story = props.storyentry;
 
-  console.log(story.imageUrl.width);
-
   return (
     <div>
       <img className="img" src={story.imageUrl}></img>

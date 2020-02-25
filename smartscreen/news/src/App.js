@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import News from "./News/News";
 import "./News/News.css";
+//require("dotenv").config();
 
 class Story {
   constructor(title, author, source, imageUrl) {
@@ -17,9 +18,11 @@ const App = () => {
   const [counter, setCounter] = useState(0);
 
   const getNews = async e => {
+    //console.log("hi" + process.env.REACT_APP_API_KEY_NEWS);
     setStories([]);
     var url =
-      "http://newsapi.org/v2/top-headlines?country=us&apiKey=ed1f8d9ba4a9488e9489b7c0eabb345d";
+      "http://newsapi.org/v2/top-headlines?country=us&apiKey=" +
+      process.env.REACT_APP_API_KEY_NEWS;
     const api_call = await fetch(url);
     const data = await api_call.json();
     console.log(data);
@@ -54,8 +57,8 @@ const App = () => {
   const updateStory = () => {
     setStory(stories[counter]);
     setCounter((counter + 1) % stories.length);
-    console.log(counter);
-    console.log(story.title);
+    //console.log(counter);
+    //console.log(story.title);
   };
 
   useEffect(() => {
