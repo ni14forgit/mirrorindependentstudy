@@ -10,6 +10,7 @@ let socket;
 const ENDPOINT = "10.197.88.190:5000";
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+const GEO_KEY = process.env.REACT_APP_GEOLOCATION_API_KEY;
 class App extends React.Component {
   state = {
     temperature: undefined,
@@ -25,7 +26,7 @@ class App extends React.Component {
     socket = io(ENDPOINT);
     socket.on("weather", () => {
       console.log("wing");
-      this.mobileGetWeather();
+      //this.mobileGetWeather();
     });
     socket.emit("join");
   }
@@ -43,7 +44,7 @@ class App extends React.Component {
   }
 
   tick() {
-    this.timedWeather();
+    this.mobileGetWeather();
   }
 
   getWeather = async e => {
@@ -75,10 +76,7 @@ class App extends React.Component {
     }
   };
 
-  apiCallToWeather = async function(position) {
-    const lng = position.coords.longitude;
-    const lat = position.coords.latitude;
-    console.log("trying to do stuff");
+  apiCallToWeather = async function(lat, lng) {
     const api_call = await fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
     ).catch(function(error) {
@@ -96,35 +94,16 @@ class App extends React.Component {
     console.log(data);
   };
 
-  mobileGetWeather = () => {
-    let func = this.apiCallToWeather.bind(this);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(func);
-    } else {
-      console.log("not supported");
-    }
-  };
-
-  getGeolocatedWeather = e => {
-    e.preventDefault();
-    console.log("its working");
-    let func = this.apiCallToWeather.bind(this);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(func);
-    } else {
-      console.log("not supported");
-    }
-  };
-
-  timedWeather = () => {
-    //console.log("hi");
-    let func = this.apiCallToWeather.bind(this);
-    if (navigator.geolocation) {
-      //navigator.geolocation.getCurrentPosition(displayLocationInfo);
-      navigator.geolocation.getCurrentPosition(func);
-    } else {
-      console.log("not supported");
-    }
+  mobileGetWeather = async () => {
+    var url = "https://ipinfo.io?token=" + GEO_KEY;
+    console.log(url);
+    const api_call = await fetch(url);
+    const data = await api_call.json();
+    const location = data["loc"];
+    const [lat, lng] = location.split(",");
+    this.apiCallToWeather(lat, lng);
+    // console.log(data);
+    // console.log(location);
   };
 
   render() {
@@ -139,8 +118,11 @@ class App extends React.Component {
                 </div>
                 <div className="col-xs-7 form-container">
                   <Form getWeather={this.getWeather} />
-                  <button onClick={this.getGeolocatedWeather}>
+                  {/* <button onClick={this.getGeolocatedWeather}>
                     Your Weather
+                  </button> */}
+                  <button onClick={this.mobileGetWeather}>
+                    Mobile Weather
                   </button>
                   <Weather
                     temperature={this.state.temperature}
