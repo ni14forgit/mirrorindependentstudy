@@ -3,16 +3,17 @@ import $ from "jquery";
 import React, { useState, useEffect } from "react";
 import "./Videocam.css";
 import "../Results/Results.css";
-import Imageresult from "../Results/Results";
 import io from "socket.io-client";
+import { ClipLoader } from "react-spinners";
 let socket;
 
 const ENDPOINT = "10.197.88.190:5000";
 
 const videoConstraints = {
   //1280
-  width: 500,
-  height: 500,
+  //500,500
+  width: 600,
+  height: 600,
   facingMode: "user"
 };
 
@@ -21,11 +22,10 @@ const styles = {
   flexDirection: "row"
 };
 
-const WebcamCapture = () => {
-  const [face, setFace] = useState(null);
-  const [show, setShow] = useState(false);
-
+const Videocam = props => {
   const webcamRef = React.useRef(null);
+  const [booth, setBooth] = useState(null);
+  const [rendering, setRendering] = useState(false);
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -36,10 +36,24 @@ const WebcamCapture = () => {
     socket.emit("join");
   }, []);
 
-  // const toggle = () => {
-  //   setFace(!face);
-  //   console.log(face);
-  // };
+  const takePhoto = async () => {
+    const wrapper = () => {
+      var timesRun = 1;
+      setBooth(timesRun);
+      var interval = setInterval(function() {
+        if (timesRun === 3) {
+          setRendering(true);
+          clearInterval(interval);
+          capture();
+        } else {
+          timesRun += 1;
+          setBooth(timesRun);
+        }
+      }, 1000);
+    };
+
+    await wrapper();
+  };
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -55,36 +69,59 @@ const WebcamCapture = () => {
       //success: function(data, e) {
       success: data => {
         console.log(data);
-        setFace(data["image"]);
-        setShow(true);
-        //this.setFace(!face)
+        props.setlastimage(data["image"]);
+        props.sethistory(oldArray => [...oldArray, data["image"].slice(0, 5)]);
+        props.toggle();
+        setRendering(false);
       }
     });
   }, [webcamRef]);
 
-  //<div className="ResultImage">{imageresult(face)}</div>
+  let boothdisplaylogo1;
+  let boothdisplaylogo2;
+
+  if (rendering) {
+    boothdisplaylogo1 = (
+      // <LoadingOverlay
+      //   active={rendering}
+      //   spinner
+      //   text="Analyzing"
+      //   style={{ color: "green" }}
+      // >
+      //   {/* <p>Some content or children or something.</p> */}
+      // </LoadingOverlay>
+      <ClipLoader size={100} color={"#126fbc"} loading={rendering} />
+    );
+    boothdisplaylogo2 = (
+      <ClipLoader size={100} color={"#126fbc"} loading={rendering} />
+    );
+  } else {
+    boothdisplaylogo1 = <p>{booth}</p>;
+    boothdisplaylogo2 = <p>{booth}</p>;
+  }
 
   return (
-    <div className="navo" style={styles}>
-      <div className="Videocam">
-        <>
-          <Webcam
-            audio={false}
-            height={828}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            width={800}
-            videoConstraints={videoConstraints}
-          />
-          <button type="button" onClick={capture}>
-            Capture photo
-          </button>
-          {/* <button onClick={toggle}>toggle</button> */}
-        </>
+    <div>
+      <div>
+        <div className="horiz1">{boothdisplaylogo1}</div>
+        <Webcam
+          className="stylecam"
+          audio={false}
+          height={750}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          width={750}
+          videoConstraints={videoConstraints}
+        />
+        <div className="horiz2">{boothdisplaylogo2}</div>
       </div>
-      <Imageresult imagesource={face} shouldshow={show} />
+      <div>
+        <button type="button" onClick={takePhoto}>
+          Capture photo
+        </button>
+      </div>
     </div>
   );
 };
 
-export default WebcamCapture;
+export default Videocam;

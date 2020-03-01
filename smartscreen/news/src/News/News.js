@@ -4,13 +4,23 @@ import "./News.css";
 
 const News = props => {
   const story = props.storyentry;
+  const visibility = props.visi;
 
   return (
     <div>
-      <img className="img" src={story.imageUrl}></img>
-      <p className="title">{story.title}</p>
-      <p className="author">{story.author}</p>
-      <p className="source">{story.source}</p>
+      <img
+        className={visibility ? "fadeInImg" : "fadeOutImg"}
+        src={story.imageUrl}
+      ></img>
+      <p className={visibility ? "fadeInTitle" : "fadeOutTitle"}>
+        {story.title}
+      </p>
+      <p className={visibility ? "fadeInAuthor" : "fadeOutAuthor"}>
+        {story.author}
+      </p>
+      <p className={visibility ? "fadeInSource" : "fadeOutSource"}>
+        {story.source}
+      </p>
       <p className="newsAPI">News API Google</p>
     </div>
   );

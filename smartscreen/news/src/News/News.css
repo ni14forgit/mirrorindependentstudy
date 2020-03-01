@@ -34,3 +34,76 @@
   font-size: "Times New Roman";
   color: white;
 }
+
+.fadeOutImg {
+  width: 670px;
+  max-height: 800px;
+  display: block;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px solid white;
+  opacity: 0;
+  transition: opacity 2.5s;
+}
+.fadeInImg {
+  width: 670px;
+  max-height: 800px;
+  display: block;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px solid white;
+  opacity: 1;
+  transition: opacity 2.5s;
+}
+
+.fadeOutTitle {
+  opacity: 0;
+  font-size: 40px;
+  text-align: center;
+  color: white;
+  font: "Palatino Linotype";
+  transition: opacity 2.5s;
+}
+.fadeInTitle {
+  font-size: 40px;
+  text-align: center;
+  color: white;
+  font: "Palatino Linotype";
+  transition: opacity 2.5s;
+  opacity: 1;
+}
+
+.fadeOutAuthor {
+  opacity: 0;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  font: "Palatino Linotype";
+  transition: opacity 2.5s;
+}
+.fadeInAuthor {
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  font: "Palatino Linotype";
+  transition: opacity 2.5s;
+  opacity: 1;
+}
+.fadeOutSource {
+  opacity: 0;
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font: "Palatino Linotype";
+  transition: opacity 2.5s;
+}
+.fadeInSource {
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font: "Palatino Linotype";
+  transition: opacity 2.5s;
+  opacity: 1;
+}

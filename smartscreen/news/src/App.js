@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import News from "./News/News";
 import "./News/News.css";
-//require("dotenv").config();
 
 class Story {
   constructor(title, author, source, imageUrl) {
@@ -16,6 +15,7 @@ const App = () => {
   const [stories, setStories] = useState([]);
   const [story, setStory] = useState(new Story("0", "0", "0", "0"));
   const [counter, setCounter] = useState(0);
+  const [visibility, setVisibility] = useState(true);
 
   const getNews = async e => {
     //console.log("hi" + process.env.REACT_APP_API_KEY_NEWS);
@@ -54,17 +54,22 @@ const App = () => {
     }
   };
 
-  const updateStory = () => {
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  const updateStory = async () => {
+    setVisibility(false);
+    await sleep(5000);
     setStory(stories[counter]);
     setCounter((counter + 1) % stories.length);
-    //console.log(counter);
-    //console.log(story.title);
+    setVisibility(true);
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       updateStory();
-    }, 5 * 1000);
+    }, 10 * 1000);
     return () => clearInterval(interval);
   });
 
@@ -75,11 +80,11 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       getNews();
-    }, 100 * 1000);
+    }, 350 * 1000);
     return () => clearInterval(interval);
   });
 
-  return <News storyentry={story}></News>;
+  return <News visi={visibility} storyentry={story}></News>;
 };
 
 export default App;
