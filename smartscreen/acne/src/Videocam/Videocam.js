@@ -57,7 +57,7 @@ const Videocam = props => {
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
-    console.log(imageSrc);
+    // console.log(imageSrc);
     $.ajax({
       type: "GET",
       //url: "http://127.0.0.1:5000?base64=" + imageSrc,
@@ -69,8 +69,20 @@ const Videocam = props => {
       //success: function(data, e) {
       success: data => {
         console.log(data);
+        const year_month = data["date"];
+        const acne_count = data["acne"];
         props.setlastimage(data["image"]);
-        props.sethistory(oldArray => [...oldArray, data["image"].slice(0, 5)]);
+
+        props.sethistory(new_dict => {
+          // var new_dict = _.clone(oldDictionary);
+          if (year_month in new_dict) {
+            new_dict[year_month] = (new_dict[year_month] + acne_count) / 2;
+          } else {
+            new_dict[year_month] = acne_count;
+          }
+
+          return new_dict;
+        });
         props.toggle();
         setRendering(false);
       }

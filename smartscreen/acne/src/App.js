@@ -5,7 +5,7 @@ import Results from "./Results/Results";
 
 function App() {
   const [webcamShow, setWebcamShow] = useState(true);
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState({});
   const [lastImage, setLastImage] = useState(null);
 
   let display;
