@@ -18,14 +18,15 @@ const Results = props => {
   const options = {
     animationEnabled: true,
     title: {
-      text: "Monthly Sales - 2017"
+      text: "Acne Analysis Over Time"
     },
     axisX: {
-      valueFormatString: "DD"
+      valueFormatString: "DD",
+      title: "Date"
     },
     axisY: {
-      title: "Sales (in USD)",
-      prefix: "$",
+      title: "Measurement",
+      prefix: "",
       includeZero: false
     },
     data: [

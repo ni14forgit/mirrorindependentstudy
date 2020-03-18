@@ -57,13 +57,52 @@ const Videocam = props => {
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
-    // console.log(imageSrc);
+    console.log(imageSrc);
+    $.ajax({
+      type: "POST",
+      //changed URL TO 5001 remember, 190 is dukeBlue?!!
+      //url: "http://10.197.88.190:5001?base64=" + imageSrc,
+      //url: "http://radiant-ravine-74747.herokuapp.com/",
+      contentType: "application/json",
+      url: "http://192.168.1.13:5000",
+      // url: "http://10.194.24.88:5001?base64=" + imageSrc,
+      dataType: "json",
+      data: JSON.stringify({
+        base64: imageSrc
+      }),
+      //success: function(data, e) {
+      success: data => {
+        console.log(data);
+        const year_month = data["date"];
+        const acne_count = data["acne"];
+        props.setlastimage(data["image"]);
+
+        props.sethistory(new_dict => {
+          // var new_dict = _.clone(oldDictionary);
+          if (year_month in new_dict) {
+            new_dict[year_month] = (new_dict[year_month] + acne_count) / 2;
+          } else {
+            new_dict[year_month] = acne_count;
+          }
+
+          return new_dict;
+        });
+        props.toggle();
+        setRendering(false);
+      }
+    });
+  }, [webcamRef]);
+
+  const storeCapture = React.useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    console.log(imageSrc);
     $.ajax({
       type: "GET",
       //url: "http://127.0.0.1:5000?base64=" + imageSrc,
       //changed URL TO 5001 remember, 190 is dukeBlue?!!
-      url: "http://10.197.88.190:5001?base64=" + imageSrc,
-      // url: "http://10.194.24.88:5001?base64=" + imageSrc,
+      //url: "http://10.197.88.190:5001/store?base64=" + imageSrc,
+      //url: "http://10.194.24.88:5001?base64=" + imageSrc,
+      url: "https://radiant-ravine-74747.herokuapp.com/?base64=" + imageSrc,
       dataType: "json",
       data: JSON.stringify(),
       //success: function(data, e) {
@@ -130,6 +169,9 @@ const Videocam = props => {
       <div>
         <button type="button" onClick={takePhoto}>
           Capture photo
+        </button>
+        <button type="button" onClick={storeCapture}>
+          Store Photo
         </button>
       </div>
     </div>
