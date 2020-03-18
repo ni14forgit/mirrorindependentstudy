@@ -20,7 +20,9 @@ const App = () => {
   ];
 
   const stylesgeneral = {
-    paddingTop: "10%"
+    paddingTop: "10%",
+    paddingRight: "5%",
+    paddingLeft: "5%"
   };
 
   const stylescredit = {
@@ -71,7 +73,6 @@ const App = () => {
           <p className={visibility ? "fadeIn" : "fadeOut"}>{author}</p>
         </div>
       </div>
-      <p style={stylescredit}>Credit: They Said So API</p>
     </div>
   );
 };
