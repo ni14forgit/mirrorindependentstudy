@@ -20,7 +20,7 @@ const NewsApp = () => {
   const [visibility, setVisibility] = useState(true);
 
   const getNews = async e => {
-    console.log("hi" + process.env.REACT_APP_API_KEY_NEWS);
+    //console.log("hi" + process.env.REACT_APP_API_KEY_NEWS);
     setStories([]);
     var url =
       "http://newsapi.org/v2/top-headlines?country=us&apiKey=" +
