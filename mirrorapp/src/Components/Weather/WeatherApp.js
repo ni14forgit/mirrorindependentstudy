@@ -96,7 +96,7 @@ class WeatherApp extends React.Component {
 
   mobileGetWeather = async () => {
     var url = "https://ipinfo.io?token=" + GEO_KEY;
-    console.log(url);
+    //console.log(url);
     const api_call = await fetch(url);
     const data = await api_call.json();
     const location = data["loc"];

@@ -2,7 +2,7 @@
 import firebase from "firebase";
 
 var firebaseConfig = {
-  apiKey: "AIzaSyDBsn3LZ85n-vVFhchUw5Mb8yPrekUWZQk",
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: "magicmirror-fe6f8.firebaseapp.com",
   databaseURL: "https://magicmirror-fe6f8.firebaseio.com",
   projectId: "magicmirror-fe6f8",
